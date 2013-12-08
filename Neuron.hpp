@@ -6,22 +6,32 @@
 
 #include "Temporal.hpp"
 
-class Sinapse;
+class Synapse;
+
+class NeuronTemporalParams {
+public:
+    static Potential eq() {
+        return -70;
+    }
+    static Potential speed() {
+        return 0.001;
+    }
+};
 
 class Neuron {
 public:
-    Neuron();
+    Neuron() {}
     void Exite(Potential imp);
 
     Potential GetPotential() const;
-    void AddInputSinapse(Sinapse &s) {
-        input_sinapses.push_back(&s);
+    void AddInputSynapse(Synapse &s) {
+        input_synapses.push_back(&s);
     }
-    void AddOutputSinapse(Sinapse &s) {
-        output_sinapses.push_back(&s);
+    void AddOutputSynapse(Synapse &s) {
+        output_synapses.push_back(&s);
     }
 
 private:
-    Temporal<Potential, -70.0, 100.0> level;
-    std::list<Sinapse *> input_sinapses, output_sinapses;
+    Temporal<Potential, NeuronTemporalParams> level;
+    std::list<Synapse *> input_synapses, output_synapses;
 };

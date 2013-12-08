@@ -1,2 +1,0 @@
-#include "Sinapse.hpp"
-

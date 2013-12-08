@@ -1,25 +1,27 @@
 #pragma once
 
-#include "ImpTypes.hpp"
+#include "ImpCommon.hpp"
+#include <limits>
 
 template <typename T> int sgn(T val) {
     return (T(0) < val) - (val < T(0));
 }
 
-template <typename V, V eq, V speed>
+
+template <typename V, typename P>
 class Temporal {
 public:
-    Temporal(): value(eq), time(0) {}
+    Temporal(): value(P::eq()), time(0) {}
     Temporal(V v0, Time t0): value(v0), time(t0) {}
     V Decay(Time t) {
-        V diff = eq - value;
+        V diff = P::eq() - value;
         Time dt = t - time;
-        if (dt < eps || diff < eps) {
+        if (dt < std::numeric_limits<V>::epsilon || diff < std::numeric_limits<V>::epsilon) {
             return value;
         }
-        V dv = speed * dt;
+        V dv = P::speed() * dt;
         if (dv > abs(diff)) {
-            value = eq;
+            value = P::eq();
         } else {
             value += sgn<V>(diff) * dv;
         }

@@ -1,7 +1,10 @@
 #pragma once
 
 #include "Neuron.hpp"
-#include "Sinapse.hpp"
+#include "Synapse.hpp"
+#include "Queue.hpp"
+
+#include <vector>
 
 class NeuralNet {
 public:
@@ -13,18 +16,18 @@ public:
     }
 
     void CreateNeurons(int k) {
-        for (i=0; i<=k ; i++)
+        for (int i=0; i<=k ; i++)
             neurons.push_back(new Neuron());
     }
 
-    void CreateSinapse(Index<Neuron> n1, Index<Neuron> n2) {
-        sinapses.push_back(GetNeuron(n1), GetNeuron n2);
+    void GrowSinapse(Index<Neuron> n1, Index<Neuron> n2) {
+        synapses.push_back(new Synapse(GetNeuron(n1), GetNeuron(n2)));
     }
 
 private:
     std::vector<Neuron *> neurons;
-    std::vector<Sinapse *> sinapses;
+    std::vector<Synapse *> synapses;
 
-    Queue<SinapseIndex> fires;
+    Queue<Index<Synapse> > fires;
 
-}
+};
