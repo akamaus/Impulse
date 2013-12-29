@@ -3,7 +3,6 @@
 #include <list>
 
 #include "ImpTypes.hpp"
-
 #include "Temporal.hpp"
 
 class Synapse;
