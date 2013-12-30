@@ -14,7 +14,7 @@ int main(int argc, char *argv[]) {
     cout << "linking them with synapses"  << endl;
     for (int i=0;i < N; i++) {
         net.GrowSinapse(Index<Neuron>(i%N), Index<Neuron>((i+1) % N));
-        cerr << i << " ";
+//        cerr << i << " ";
     }
 
     TimeQueue<int> q_test;

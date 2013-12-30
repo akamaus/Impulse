@@ -41,7 +41,7 @@ private:
     };
     class SynapseCreator {
     public:
-        SynapseCreator(NeuralNet _net, const Index<Neuron> &_n1, const Index<Neuron> &_n2):
+        SynapseCreator(NeuralNet &_net, const Index<Neuron> &_n1, const Index<Neuron> &_n2):
             net(_net), n1(_n1), n2(_n2) {}
         Synapse * operator()(Index<Synapse> si) const {
             return new Synapse(net, si, n1, n2);
