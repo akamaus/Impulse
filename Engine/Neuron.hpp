@@ -5,32 +5,36 @@
 #include "ImpTypes.hpp"
 #include "Temporal.hpp"
 
+class NeuralNet;
 class Synapse;
 
 class NeuronTemporalParams {
 public:
-    static Potential eq() {
+    static constexpr Potential eq() {
         return -70;
     }
-    static Potential speed() {
+    static constexpr Potential speed() {
         return 0.001;
+    }
+    static constexpr Potential action_potential() {
+        return -50;
     }
 };
 
 class Neuron {
 public:
     Neuron() {}
-    void Exite(Potential imp);
+    void Exite(Potential imp,  NeuralNet &net);
 
     Potential GetPotential() const;
-    void AddInputSynapse(Synapse &s) {
-        input_synapses.push_back(&s);
+    void AddInputSynapse(const Index<Synapse> &si) {
+        input_synapses.push_back(si);
     }
-    void AddOutputSynapse(Synapse &s) {
-        output_synapses.push_back(&s);
+    void AddOutputSynapse(const Index<Synapse> &si) {
+        output_synapses.push_back(si);
     }
 
 private:
     Temporal<Potential, NeuronTemporalParams> level;
-    std::list<Synapse *> input_synapses, output_synapses;
+    std::list<Index<Synapse>> input_synapses, output_synapses;
 };

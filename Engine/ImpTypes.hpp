@@ -7,9 +7,15 @@ typedef float Potential;
 template <typename Obj>
 class Index {
 public:
-    Index(int val): index(val) {};
-    int GetIndex() {
+    Index(): index{0} {}
+    Index(int val): index{val} {};
+    int GetIndex() const {
         return index;
     }
+    Index<Obj> Next() const {
+        Index<Obj> next(GetIndex() + 1);
+        return next;
+    }
+private:
     int index;
 };

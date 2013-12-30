@@ -25,9 +25,13 @@ public:
     }
 };
 
+class NeuralNet;
 class Synapse {
 public:
-    Synapse(Neuron &n1, Neuron &n2);
+    Synapse(NeuralNet &net, const Index<Synapse> &s, const Index<Neuron> &n1, const Index<Neuron> &n2);
+    Time GetDelay() const {
+        return delay;
+    }
 
 private:
     Time delay;

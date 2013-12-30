@@ -11,13 +11,10 @@ bool cmp(pair<Time, T> &a, pair<Time, T> &b) {
 }
 
 template <typename T>
-class Queue {
+class TimeQueue {
 public:
-    Queue() {}
-    void Enqueue(Time t, T &obj) {
-        queue.push_back(pair<Time, T>(t, obj));
-        std::push_heap (queue.begin(),queue.end(),cmp<T>);
-    }
+    TimeQueue() {}
+
     void Enqueue(Time t, T obj) {
         queue.push_back(pair<Time, T>(t, obj));
         std::push_heap (queue.begin(),queue.end(),cmp<T>);
