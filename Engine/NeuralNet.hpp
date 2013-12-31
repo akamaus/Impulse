@@ -28,7 +28,7 @@ public:
 
     // Соединить нейроны синапсом
     void GrowSinapse(Index<Neuron> n1, Index<Neuron> n2) {
-        synapses.Create(SynapseCreator{*this, n1,n2});
+        synapses.Create([this, &n1, &n2](Index<Synapse> si) { return new Synapse(*this, si, n1, n2); });
     }
 
     // Активировать синапс с учётом его задержки срабатывания
@@ -52,26 +52,8 @@ public:
 
 private:
 
-    class NeuronCreator {
-    public:
-        Neuron * operator()(Index<Neuron> ni) const {
-            return new Neuron;
-        };
-    };
-    class SynapseCreator {
-    public:
-        SynapseCreator(NeuralNet &_net, const Index<Neuron> &_n1, const Index<Neuron> &_n2):
-            net(_net), n1(_n1), n2(_n2) {}
-        Synapse * operator()(Index<Synapse> si) const {
-            return new Synapse(net, si, n1, n2);
-        };
-        NeuralNet &net;
-        const Index<Neuron> &n1, &n2;
-    };
-
-
-    Storage<Neuron, NeuronCreator> neurons;
-    Storage<Synapse, SynapseCreator> synapses;
+    Storage<Neuron> neurons;
+    Storage<Synapse> synapses;
 
     TimeQueue<Index<Synapse> > fires;
     Time time;

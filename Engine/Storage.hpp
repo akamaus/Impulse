@@ -1,8 +1,10 @@
 #pragma once
 
+#include "ImpTypes.hpp"
+
+#include <functional>
 #include <unordered_map>
 
-#include "ImpTypes.hpp"
 
 namespace std {
     template<typename T>
@@ -20,7 +22,7 @@ namespace std {
     };
 };
 
-template <typename T, typename Creator>
+template <typename T>
 class Storage {
 public:
     Storage() {}
@@ -31,7 +33,7 @@ public:
         fresh = fresh.Next();
         return i;
     }
-    Index<T> Create(const Creator &creator) {
+    Index<T> Create(std::function<T*(Index<T>)> creator) {
         auto i = fresh;
         storage[i] = creator(i);
         return i;
