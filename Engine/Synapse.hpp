@@ -32,9 +32,10 @@ public:
     Time GetDelay() const {
         return delay;
     }
-
+    void Fire(NeuralNet &net);
 private:
     Time delay;
+    const Index<Neuron> &source, &target;
 
     Temporal<Potential, SynapseConductivityParams> conductivity; // эффективность проведения импульса
     Temporal<double, SynapseActivityParams> activity; // уровень готовности к пластической перестройке

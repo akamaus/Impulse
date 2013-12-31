@@ -2,4 +2,4 @@
 #link_directories(${Impulse_BINARY_DIR}/Engine)
 
 #the one C file
-add_executable(Impulse main.cpp Synapse.cpp)
+add_executable(Impulse main.cpp NeuralNet.cpp  Neuron.cpp  Synapse.cpp)

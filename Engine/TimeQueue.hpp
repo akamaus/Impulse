@@ -26,6 +26,10 @@ public:
         queue.pop_back();
         return last;
     }
+    bool empty() const {
+        return queue.empty();
+    }
+
 private:
     vector<pair<Time, T> > queue;
 };

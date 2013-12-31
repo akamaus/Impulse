@@ -27,9 +27,16 @@ public:
         synapses.Create(SynapseCreator{*this, n1,n2});
     }
 
-    void FireSynapse(Index<Synapse> si, Time delta_t) {
-        fires.Enqueue(time + delta_t, si);
+    void FireSynapse(Index<Synapse> si) {
+        Synapse &syn = GetSynapse(si);
+        fires.Enqueue(time + syn.GetDelay(), si);
     }
+
+    Time GetTime() const {
+        return time;
+    }
+
+    bool Tick();
 
 private:
 

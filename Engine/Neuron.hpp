@@ -24,7 +24,7 @@ public:
 class Neuron {
 public:
     Neuron() {}
-    void Exite(Potential imp,  NeuralNet &net);
+    void Exite(NeuralNet &net, Potential imp);
 
     Potential GetPotential() const;
     void AddInputSynapse(const Index<Synapse> &si) {

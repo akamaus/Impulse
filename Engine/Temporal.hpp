@@ -1,7 +1,9 @@
 #pragma once
 
 #include "ImpCommon.hpp"
+
 #include <limits>
+#include <cstdlib>
 
 template <typename T> int sgn(T val) {
     return (T(0) < val) - (val < T(0));
@@ -16,7 +18,7 @@ public:
     V Decay(Time t) {
         V diff = P::eq() - value;
         Time dt = t - time;
-        if (dt < std::numeric_limits<V>::epsilon || diff < std::numeric_limits<V>::epsilon) {
+        if (dt < std::numeric_limits<V>::epsilon() || diff < std::numeric_limits<V>::epsilon()) {
             return value;
         }
         V dv = P::speed() * dt;
@@ -31,6 +33,7 @@ public:
     V Add(V v, Time t) {
         Decay(t);
         value += v;
+        return value;
     }
 private:
     V value;
