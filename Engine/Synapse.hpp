@@ -5,8 +5,12 @@
 
 class Neuron;
 
+// Параметры пластичности синапса
 class SynapseActivityParams {
 public:
+    static Potential starting() {
+        return 0;
+    }
     static Potential eq() {
         return 0;
     }
@@ -15,13 +19,24 @@ public:
     }
 };
 
+// Параметры проводимости синапса
 class SynapseConductivityParams {
 public:
+    static Potential starting() {
+        return 4;
+    }
     static Potential eq() {
         return 0;
     }
     static Potential speed() {
         return 0.1;
+    }
+};
+
+class SynapseParams {
+public:
+    static Time default_synaptic_delay() { // Задержка на синапсе
+        return 0.001;
     }
 };
 
@@ -34,8 +49,8 @@ public:
     }
     void Fire(NeuralNet &net);
 private:
-    Time delay;
     const Index<Neuron> &source, &target;
+    Time delay;
 
     Temporal<Potential, SynapseConductivityParams> conductivity; // эффективность проведения импульса
     Temporal<double, SynapseActivityParams> activity; // уровень готовности к пластической перестройке

@@ -28,6 +28,17 @@ int main(int argc, char *argv[]) {
         cout << p.second << endl;
     }
 
+    net.FireSynapse(Index<Synapse>{0}, 0.1);
+    net.FireSynapse(Index<Synapse>{0}, 0.2);
+    net.FireSynapse(Index<Synapse>{0}, 0.3);
+    net.FireSynapse(Index<Synapse>{0}, 0.4);
+    net.FireSynapse(Index<Synapse>{0}, 0.5);
+    net.FireSynapse(Index<Synapse>{0}, 0.6);
+
+    while(net.Tick()) {
+        cerr << "*** Tick finished, time = " << net.GetTime() << endl;
+    }
+
 //    cout << q_test.Dequeue().second() << endl;
 //    cout << q_test.Dequeue().second() << endl;
 

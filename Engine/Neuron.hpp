@@ -8,8 +8,12 @@
 class NeuralNet;
 class Synapse;
 
+// Параметры нейрона
 class NeuronTemporalParams {
 public:
+    static Potential starting() {
+        return -70;
+    }
     static constexpr Potential eq() {
         return -70;
     }
@@ -18,6 +22,13 @@ public:
     }
     static constexpr Potential action_potential() {
         return -50;
+    }
+};
+
+class NeuronParams {
+public:
+    static Potential hyper_potential() {
+        return -75;
     }
 };
 

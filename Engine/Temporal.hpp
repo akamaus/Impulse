@@ -13,7 +13,8 @@ template <typename T> int sgn(T val) {
 template <typename V, typename P>
 class Temporal {
 public:
-    Temporal(): value(P::eq()), time(0) {}
+    Temporal(): value(P::starting()), time(0) {}
+    Temporal(V v0): value(v0), time(0) {}
     Temporal(V v0, Time t0): value(v0), time(t0) {}
     V Decay(Time t) {
         V diff = P::eq() - value;
@@ -33,6 +34,12 @@ public:
     V Add(V v, Time t) {
         Decay(t);
         value += v;
+        return value;
+    }
+    void Set(V v) {
+        value = v;
+    }
+    V Get() const {
         return value;
     }
 private:
